@@ -6,6 +6,12 @@ const envVarsSchema = joi.object({
     .allow(['development', 'production', 'test', 'staging'])
     .required(),
   PORT: joi.number().default(8080),
+  DATABASE: joi.string().required(),
+  TEST_DB: joi.string().required(),
+  DATABASE_DIALECT: joi.string().default('postgres'),
+  DATABASE_PASSWORD: joi.string().default(null),
+  DATABASE_USER: joi.string().required(),
+  HOST: joi.string().required(),
 })
   .unknown()
   .required()
@@ -20,7 +26,12 @@ if (error) {
 const config = {
   env: envVars.NODE_ENV || 'development',
   port: envVars.PORT,
+  databaseName: envVars.DATABASE,
+  testDbName: envVars.TEST_DB,
+  dbUsername: envVars.DATABASE_USER,
+  databaseDialect: envVars.DATABASE_DIALECT,
+  dbPassword: envVars.password,
+  host: envVars.HOST,
 };
 
 module.exports = config;
-

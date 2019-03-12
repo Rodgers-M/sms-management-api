@@ -1,0 +1,25 @@
+version: '2'
+exclude_patterns:
+  - 'database/'
+  - 'config/'
+plugins:
+  eslint:
+    enabled: true
+    channel: 'eslint-4'
+    config:
+      config: './eslintrc.json'
+  duplication:
+    enabled: true
+    config:
+      languages:
+        js:
+          checks:
+            identical-code:
+              config:
+                threshold: 25
+            similar-code:
+              config:
+                threshold: 50
+            method-lines:
+              config:
+                threshold: 50
