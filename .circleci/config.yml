@@ -1,9 +1,29 @@
 version: 2
+machine:
+  environment:
+    # Add the Postgres 9.6 binaries to the path.
+    PATH: /usr/lib/postgresql/9.6/bin/:$PATH
+
+  pre:
+    # Start Postgres 9.6.
+    - sudo service postgresql start 9.6
+
+    # Create a new test database.
+    - sudo -u postgres psql -p 5432 -c "create database sms_test_db;"
 
 jobs:
   build:
     docker: 
       - image: circleci/node:11.8.0
+        environment:
+          DATABASE: sms_test_db
+          DATABASE_USER: root
+          HOST: localhost
+      - image: circleci/postgres:9.6
+        environment:
+          POSTGRES_DB: sms_test_db
+          POSTGRES_USER: root
+
     steps:
       - checkout 
       - run:
