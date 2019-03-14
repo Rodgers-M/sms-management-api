@@ -3,7 +3,8 @@ const router = require('express').Router()
 
 const SmsController = require('../../controllers/smsController')
 
-router.get('/', (req, res) => res.send('first route hit'))
-router.post('/')
+router.get('/', SmsController.getAll)
+router.get('/:id', SmsController.getSmsById)
+router.post('/', SmsController.sendSms)
 
 module.exports = router
