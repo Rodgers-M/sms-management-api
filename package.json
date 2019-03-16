@@ -7,22 +7,33 @@
     "lib": "lib"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "fancy-log": "^1.3.3",
+    "http-status": "^1.3.1",
     "jest": "^24.3.1",
     "joi": "^14.3.1",
+    "morgan": "^1.9.1",
     "nodemon": "^1.18.10",
     "path": "^0.12.7",
     "pg": "^7.8.2",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.43.0"
+    "sequelize": "^4.43.0",
+    "sequelize-cli": "^5.4.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mock-req-res": "^1.0.4",
+    "sinon": "^7.2.7",
+    "supertest": "^4.0.2"
+  },
   "scripts": {
     "start": "node index.js",
     "start:dev": "nodemon index.js",
-    "test": "NODE_ENV=test jest --passWithNoTests"
+    "pretest": "NODE_ENV=test yarn db:migrate",
+    "test": "NODE_ENV=test jest --no-cache  --detectOpenHandles --runInBand --forceExit",
+    "db:migrate": "node_modules/.bin/sequelize db:migrate"
+
   },
   "repository": {
     "type": "git",
@@ -32,6 +43,24 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Rodgers-M/sms-management-api/issues"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "app/**/*.{js,jsx}",
+      "lib/**/*.{js,jsx}",
+      "!server.js",
+      "!node_modules/"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/config",
+      "<rootDir>/database/migrations",
+      "<rootDir>/database/seeders",
+      "<rootDir>/database/models/index.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./testSetup.js"
+    ]
   },
   "homepage": "https://github.com/Rodgers-M/sms-management-api#readme"
 }
