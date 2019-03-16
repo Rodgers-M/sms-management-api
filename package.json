@@ -28,6 +28,7 @@
   "scripts": {
     "start": "node index.js",
     "start:dev": "nodemon index.js",
+    "pretest": "NODE_ENV=test yarn db:migrate",
     "test": "NODE_ENV=test jest --no-cache  --detectOpenHandles --runInBand --forceExit",
     "db:migrate": "node_modules/sequelize-cli/lib/sequelize db:migrate"
   },
@@ -44,13 +45,18 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "app/**/*.{js,jsx}",
+      "lib/**/*.{js,jsx}",
       "!server.js",
       "!node_modules/"
     ],
     "coveragePathIgnorePatterns": [
+      "<rootDir>/config",
       "<rootDir>/database/migrations",
       "<rootDir>/database/seeders",
       "<rootDir>/database/models/index.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./testSetup.js"
     ]
   },
   "homepage": "https://github.com/Rodgers-M/sms-management-api#readme"
