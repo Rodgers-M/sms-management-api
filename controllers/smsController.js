@@ -6,7 +6,6 @@ const { handleSuccess, handleFailure, handleSuccessResult } = require('../lib/he
 class SmsController {
   static async sendSms(req, res, next) {
     try {
-      console.log(req.body)
       const { message } = req.body
       const status = 'pending'
 
@@ -31,8 +30,13 @@ class SmsController {
     }
   }
   static async getSmsById(req, res) {
-    const sms = await db.Sms.findById(req.params.id)
-    return handleSuccessResult(res, HttpStatus.OK, sms)
+    try {
+      const sms = await db.Sms.findById(req.params.id)
+      if(sms) return handleSuccessResult(res, HttpStatus.OK, sms)
+      return handleSuccess(res, HttpStatus.OK, 'no sms with given id')
+    } catch (error) {
+      return handleFailure(res, HttpStatus.INTERNAL_SERVER_ERROR, error)
+    }
   }
 }
 
