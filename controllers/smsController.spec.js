@@ -1,15 +1,21 @@
 const{ mockRequest, mockResponse } = require('mock-req-res')
 
 const SmsController = require('./smsController')
+beforeAll(async() => {
+  const contacts = [
+    {name: 'rodger', phone: '0707070707'},
+    {name: 'keisha', phone: '0808080808'},
+  ]
+  await db.Contact.bulkCreate(contacts)
+})
 
 describe('#SmsController', () => {
 
   const req = {
     body: {
       message: 'hello',
-      recieverId: '123',
-      senderId: '234',
-      id: 3
+      sender: '0707070707',
+      receiver: '0808080808',
     },
     params: {
       id: 1
