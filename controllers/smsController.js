@@ -2,22 +2,35 @@ const HttpStatus = require('http-status')
 
 const db = require('../database/models')
 const { handleSuccess, handleFailure, handleSuccessResult } = require('../lib/helpers/responsesHelper')
+const getContactByPhone = require('../lib/contacts/getContactByPhone')
 
 class SmsController {
-  static async sendSms(req, res, next) {
+  static async sendSms(req, res) {
     try {
-      const { message } = req.body
-      const status = 'pending'
+      const { message, sender, receiver } = req.body
+      const receiverContact = await getContactByPhone(db, receiver)
+      const senderContact = await getContactByPhone(db, sender)
+      if(!receiverContact) return handleFailure(
+        res,
+        HttpStatus.CONFLICT,
+        {message: `the receiver phone, ${receiver} does not exist, please provide a valid phone`},
+      )
+      if(!senderContact) return handleFailure(
+        res,
+        HttpStatus.CONFLICT,
+        {message: `the sender phone, ${sender} does not exist, please provide a valid phone`},
+      )
 
       await db.Sms.create({
         message,
-        status,
+        status: 'pending',
+        receiverId: receiverContact.id,
+        senderId: senderContact.id
       })
       return handleSuccess(res, HttpStatus.CREATED, 'sms created successful')
     } catch (error) {
       return handleFailure(res, HttpStatus.INTERNAL_SERVER_ERROR, error)
     }
-    next()
   }
 
   static async getAll(req, res) {

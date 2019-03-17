@@ -3,6 +3,14 @@ const request = require('supertest')
 const app = require('../app')
 
 describe('#smsRoutes', () => {
+
+beforeAll(async() => {
+  const contacts = [
+    {name: 'rodger', phone: '0707070707'},
+    {name: 'keisha', phone: '0808080808'},
+  ]
+  await db.Contact.bulkCreate(contacts)
+})
   describe('#getAll sms', ()=> {
     test('should return all sms in db', async () => {
       await db.Sms.create({message: 'hello world'})
@@ -19,7 +27,7 @@ describe('#smsRoutes', () => {
     test('it should create an sms and return success message', async () => {
       const response = await request(app).post('/sms')
         .set('Content-Type', 'application/json')
-        .send({message: 'some message'})
+        .send({message: 'some message', sender: '0707070707', receiver: '0808080808' })
       expect(JSON.parse(response.text).message).toEqual('sms created successful')
     })
   })
