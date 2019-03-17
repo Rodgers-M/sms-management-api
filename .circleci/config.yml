@@ -19,6 +19,7 @@ jobs:
           DATABASE: sms_test_db
           TEST_DB: sms_test_db
           DATABASE_USER: root
+          DATABASE_URL: someurlinprod
           HOST: localhost
       - image: circleci/postgres:9.6
         environment:
