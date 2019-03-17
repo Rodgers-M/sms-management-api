@@ -16,7 +16,8 @@ const database = {
     ...defaultConfig, database: config.testDbName,
   },
   production: {
-    ...defaultConfig,
+    use_env_variable: config.databaseUrl,
+    dialect: config.databaseDialect
   },
 }
 

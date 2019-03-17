@@ -12,6 +12,7 @@ const envVarsSchema = joi.object({
   DATABASE_PASSWORD: joi.string().default(null),
   DATABASE_USER: joi.string().required(),
   HOST: joi.string().required(),
+  DATABASE_URL: joi.string().required(),
 })
   .unknown()
   .required()
@@ -32,6 +33,7 @@ const config = {
   databaseDialect: envVars.DATABASE_DIALECT,
   dbPassword: envVars.password,
   host: envVars.HOST,
+  databaseUrl: envVars.DATABASE_URL
 };
 
 module.exports = config;
