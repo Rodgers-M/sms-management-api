@@ -11,12 +11,14 @@ const defaultConfig = {
 const database = {
   development: {
     ...defaultConfig,
+    use_env_variable: 'DATABASE_URL',
   },
   test: {
     ...defaultConfig, database: config.testDbName,
   },
   production: {
-    use_env_variable: config.databaseUrl,
+    ...defaultConfig,
+    use_env_variable: 'DATABASE_URL',
     dialect: config.databaseDialect
   },
 }
