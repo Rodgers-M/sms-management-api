@@ -30,7 +30,7 @@ POST /sms                   | send an sms
 DELETE /sms/:id             | delete sms with the given id
 
 
-** Endpoint payload **
+**Endpoint payload**
 
 * POST /contants
 ```
@@ -50,5 +50,5 @@ DELETE /sms/:id             | delete sms with the given id
 }
 ```
 **Note Both the sender and reciever contants have to be existing for successful
-message sending
+message sending**
 
