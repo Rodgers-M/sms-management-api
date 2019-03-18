@@ -17,17 +17,18 @@ Nodejs API built using the express framework and postgres as the data store.
 
 ** Endpoints exposed by the API **
 
+
 Endpoint                    |  Functionality
-__________________________________
+ ------------------------   |   ------------------------ 
 GET /contants               | get all contants
 GET /contants/:id           | get contant with the given id
 POST /contants              | create contant
 DELETE /contants/:id        | delete contant with the given id
-                            |
 GET /sms                    | get all sms 
 GET /sms/:id                | get sms with the given id
 POST /sms                   | send an sms
 DELETE /sms/:id             | delete sms with the given id
+
 
 ** Endpoint payload **
 
