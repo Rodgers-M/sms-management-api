@@ -12,7 +12,8 @@ const envVarsSchema = joi.object({
   DATABASE_PASSWORD: joi.string().default(null),
   DATABASE_USER: joi.string().required(),
   HOST: joi.string().required(),
-  DATABASE_URL: joi.string().required(),
+  DATABASE_URL: joi.string().default(null),
+  DATABASE_PORT: joi.string().default(5432)
 })
   .unknown()
   .required()
@@ -27,13 +28,14 @@ if (error) {
 const config = {
   env: envVars.NODE_ENV || 'development',
   port: envVars.PORT,
-  databaseName: envVars.DATABASE,
+  dbName: envVars.DATABASE,
   testDbName: envVars.TEST_DB,
   dbUsername: envVars.DATABASE_USER,
   databaseDialect: envVars.DATABASE_DIALECT,
   dbPassword: envVars.password,
   host: envVars.HOST,
-  databaseUrl: envVars.DATABASE_URL
+  databaseUrl: envVars.DATABASE_URL,
+  databasePort: envVars.DATABASE_PORT
 };
 
 module.exports = config;
