@@ -11,11 +11,11 @@ Nodejs API built using the express framework and postgres as the data store.
 * start the application with `yarn start` or `yarn start:dev`
 * Use `yarn test` to run the tests
 
-** API features **
+**API features**
 * creating contants
 * sending and recieving sms
 
-** Endpoints exposed by the API **
+**Endpoints exposed by the API**
 
 
 Endpoint                    |  Functionality
