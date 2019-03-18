@@ -3,21 +3,28 @@ const HttpStatus = require('http-status')
 const db = require('../database/models')
 const { handleSuccess, handleFailure, handleSuccessResult } = require('../lib/helpers/responsesHelper')
 const getContactByPhone = require('../lib/contacts/getContactByPhone')
+const validateSmsPayload = require('../lib/validators/validateSmsPayload')
 
 class SmsController {
   static async sendSms(req, res) {
     try {
       const { message, sender, receiver } = req.body
+      const errors = validateSmsPayload(req.body)
+      if(Object.keys(errors).length) return handleFailure(
+        res,
+      HttpStatus.UNPROCESSABLE_ENTITY,
+      {message: errors}
+      )
       const receiverContact = await getContactByPhone(db, receiver)
       const senderContact = await getContactByPhone(db, sender)
       if(!receiverContact) return handleFailure(
         res,
-        HttpStatus.CONFLICT,
+        HttpStatus.UNPROCESSABLE_ENTITY,
         {message: `the receiver phone, ${receiver} does not exist, please provide a valid phone`},
       )
       if(!senderContact) return handleFailure(
         res,
-        HttpStatus.CONFLICT,
+        HttpStatus.UNPROCESSABLE_ENTITY,
         {message: `the sender phone, ${sender} does not exist, please provide a valid phone`},
       )
 

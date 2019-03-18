@@ -3,11 +3,18 @@ const HttpStatus = require('http-status')
 const db = require('../database/models')
 const doesPhoneNumberExist = require('../lib/validators/doesPhoneNumberExist')
 const { handleSuccess, handleFailure, handleSuccessResult } = require('../lib/helpers/responsesHelper')
+const validateContactPayload = require('../lib/validators/validateContactPayload')
 
 class ContactsController {
   static async createContact(req, res) {
     try {
       const { name, phone } = req.body
+      const errors = validateContactPayload(req.body)
+      if(Object.keys(errors).length) return handleFailure(
+        res,
+      HttpStatus.UNPROCESSABLE_ENTITY,
+      {message: errors}
+      )
       const phoneNumberExists = await doesPhoneNumberExist(db, phone)
       if(phoneNumberExists) handleFailure(res, HttpStatus.CONFLICT, {message: 'phone number already exists'})
       await db.Contact.create({
