@@ -1,6 +1,5 @@
 # sms-management-api
-This is an API that enables users to send and recieve text messages. It is
-Nodejs API built using the express framework and postgres as the data store.
+This is an API that enables users to send and receive text messages. It is a Nodejs API built using the express framework and Postgres as the data store.
 
 **Installing locally**
 * clone the repo
@@ -46,9 +45,9 @@ DELETE /sms/:id             | delete sms with the given id
 {
   "message": "message to send",
   "sender": "the phone number of the sender",
-  "reciever": "the phone number of message reciepient"
+  "receiver": "the phone number of message reciepient"
 }
 ```
-**Note Both the sender and reciever contants have to be existing for successful
+**Note Both the sender and receiver contants have to be existing for successful
 message sending**
 
