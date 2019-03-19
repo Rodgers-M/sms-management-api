@@ -20,7 +20,8 @@
     "pg": "^7.8.2",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.43.0",
-    "sequelize-cli": "^5.4.0"
+    "sequelize-cli": "^5.4.0",
+    "swagger-ui-express": "^4.0.2"
   },
   "devDependencies": {
     "mock-req-res": "^1.0.4",
@@ -33,7 +34,6 @@
     "pretest": "NODE_ENV=test yarn db:migrate",
     "test": "NODE_ENV=test jest --no-cache  --detectOpenHandles --runInBand --forceExit",
     "db:migrate": "node_modules/.bin/sequelize db:migrate"
-
   },
   "repository": {
     "type": "git",
