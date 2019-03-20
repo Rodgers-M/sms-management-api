@@ -12,7 +12,7 @@ This is an API that enables users to send and receive text messages. It is a Nod
 * Use `yarn test` to run the tests
 
 **API features**
-* creating contants
+* creating contacts
 * sending and recieving sms
 
 **Endpoints exposed by the API**
@@ -20,10 +20,10 @@ This is an API that enables users to send and receive text messages. It is a Nod
 
 Endpoint                    |  Functionality
  ------------------------   |   ------------------------ 
-GET /contants               | get all contants
-GET /contants/:id           | get contant with the given id
-POST /contants              | create contant
-DELETE /contants/:id        | delete contant with the given id
+GET /contacts               | get all contacts
+GET /contacts/:id           | get contact with the given id
+POST /contacts              | create contact
+DELETE /contacts/:id        | delete contact with the given id
 GET /sms                    | get all sms 
 GET /sms/:id                | get sms with the given id
 POST /sms                   | send an sms
@@ -32,7 +32,7 @@ DELETE /sms/:id             | delete sms with the given id
 
 **Endpoint payload**
 
-* POST /contants
+* POST /contacts
 ```
 {
   "name": "name",
@@ -49,6 +49,6 @@ DELETE /sms/:id             | delete sms with the given id
   "receiver": "the phone number of message reciepient"
 }
 ```
-**Note Both the sender and receiver contants have to be existing for successful
+**Note Both the sender and receiver contacts have to be existing for successful
 message sending**
 
