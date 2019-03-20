@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/Rodgers-M/sms-management-api.svg?style=svg)](https://circleci.com/gh/Rodgers-M/sms-management-api)
 # sms-management-api
 This is an API that enables users to send and receive text messages. It is a Nodejs API built using the express framework and Postgres as the data store.
 
