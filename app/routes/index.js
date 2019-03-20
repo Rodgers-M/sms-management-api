@@ -11,7 +11,8 @@ const routes = app => {
   app.get('/', (req, res) => res.status(HttpStatus.OK).send('welcome to sms API, visit /api-docs on your browser for documentation'))
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   //any route apart from the above defined
-  app.use('*', (req, res) => res.status(HttpStatus.NOT_FOUND).send('path not found'))
+    app.use('*', (req, res) => res.status(HttpStatus.NOT_FOUND).json({message:'path not found, please check and try again'}))
+
   return app
 }
 
